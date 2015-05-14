@@ -9,21 +9,18 @@ For each question, it automatically generates:
 
 ## setup
 
-```bash
-git clone ...
-```
+1. Clone this repository somewhere.
+2. Add `cs341_create/bin` to your PATH.
 
-Then, just add `cs341_create/bin` to your PATH.
+## try it out!
 
-## usage
+Just run `cs341_create example && cd example` and poke around in that directory. You can:
 
-```bash
-cs341_create a1q4a
-cd a1q4a
-vim tests/test1.{in,out} -p # add a test
-vim a1q4a.cpp # already contains a default hello world implementation
-make test # test your solution
-```
+1. Check out the example c++ file, `example.cpp`
+2. Run the default tests with `make test`
+3. Add your own tests by creating `tests/your-test.in` and `tests/your-test.out` files.
+
+## example usage
 
 CS341 solutions are in a single file `FILENAME.cpp`. The command `make test` runs
 all the tests in the `FILENAME/tests/` directory. It looks for files in the
@@ -40,11 +37,11 @@ int main(int argc, char **argv) {
   std::cout << "Hello world!" << std::endl;
   return 0;
 }
-$
+
 $ cat tests/helloworld.in
 $ cat tests/helloworld.out
 Hello world!
-$
+
 $ make test
 clang++ -std=c++11 -o example example.cpp
 ./run-tests example
@@ -53,5 +50,5 @@ running helloworld...
 
 1 passed
 0 failed
-$
+
 ```
