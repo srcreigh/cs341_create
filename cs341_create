@@ -1,0 +1,30 @@
+#!/bin/bash
+
+EXEC="$0"
+BIN_PATH=`which ${EXEC}`
+COPY_DIR=`dirname $BIN_PATH`
+
+if [ $# -lt 1 ]; then
+  echo "usage: ${EXEC} PROJECT_NAME"
+  exit 1
+fi
+
+FILENAME="$1"
+OUTPUT_DIR="`pwd`/$FILENAME"
+
+if [ -d $OUTPUT_DIR ]; then
+  echo "error: output directory $OUTPUT_DIR already exists"
+  exit 1
+fi
+
+mkdir -pv "$OUTPUT_DIR"
+
+cp -Rv "$COPY_DIR/tests" "$OUTPUT_DIR/tests"
+cp -v "$COPY_DIR/Makefile.TEMPLATE" "$OUTPUT_DIR/Makefile"
+cp -v "$COPY_DIR/helloworld.cpp" "$OUTPUT_DIR/$FILENAME.cpp"
+cp -v "$COPY_DIR/run_tests.sh" "$OUTPUT_DIR/run_tests.sh"
+echo "$FILENAME" > "$OUTPUT_DIR/.gitignore"
+
+sed -i ".bak" -e "s/{{FILENAME}}/$FILENAME/g" "$OUTPUT_DIR/Makefile"
+rm -v "$OUTPUT_DIR/Makefile.bak"
+

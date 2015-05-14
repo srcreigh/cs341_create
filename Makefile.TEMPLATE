@@ -1,0 +1,18 @@
+# set this to be the required filename
+EXEC = {{FILENAME}}
+
+CXX = clang++
+CPPFLAGS = -std=c++11
+
+all:
+	$(CXX) $(CPPFLAGS) -o $(EXEC) $(EXEC).cpp
+
+# cleanup
+.PHONY : clean
+clean :
+	-rm $(EXEC)
+
+# testing
+.PHONY : test
+test : all
+	./run_tests.sh $(EXEC)
